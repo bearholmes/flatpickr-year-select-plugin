@@ -1,0 +1,52 @@
+.flatpickr-calendar .flatpickr-months {
+  display: inline-block;
+}
+
+.flatpickr-current-month input.cur-year {
+  padding: 0;
+  pointer-events: none;
+}
+
+.flatpickr-current-month .numInputWrapper {
+  display: none;
+}
+
+.flatpickr-calendar .flatpickr-years {
+  display: inline-block;
+  margin-right: 7px;
+}
+
+.flatpickr-current-year {
+  overflow: hidden;
+  width: auto;
+  height: 24px;
+  padding: 0;
+  font-size: 13px;
+  line-height: 24px;
+  text-align: center;
+  transform: translate3d(0px, 0px, 0px);
+}
+
+.flatpickr-current-year .flatpickr-monthDropdown-years {
+  position: relative;
+  width: auto;
+  height: auto;
+  margin: -1px 0 0 0;
+  padding: 0;
+  border: none;
+  border-radius: 0;
+  font-weight: 700;
+  font-size: inherit;
+  line-height: inherit;
+  font-family: inherit;
+  color: inherit;
+  background: transparent;
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  box-sizing: border-box;
+  cursor: pointer;
+  outline: none;
+  vertical-align: baseline;
+  vertical-align: initial;
+}

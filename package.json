@@ -1,0 +1,46 @@
+{
+  "name": "flatpickr-year-select-plugin",
+  "version": "1.0.0",
+  "description": "change year selection box",
+  "main": "dist/flatpickr-year-select-plugin.js",
+  "module": "dist/flatpickr-year-select-plugin.mjs",
+  "umd:main": "dist/flatpickr-year-select-plugin.umd.js",
+  "browser": "dist/flatpickr-year-select-plugin.umd.js",
+  "typings": "dist/types/plugin.d.ts",
+  "scripts": {
+    "build": "vite build  && tsc",
+    "build-cjs": "rollup -c",
+    "build-css": "node build-css.cjs",
+    "format": "prettier . --write"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bearholmes/flatpickr-year-select-plugin.git"
+  },
+  "author": {
+    "name": "bearholmes",
+    "email": "bearholmes@gmail.com"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/bearholmes/flatpickr-year-select-plugin/issues"
+  },
+  "homepage": "https://github.com/bearholmes/flatpickr-year-select-plugin#readme",
+  "devDependencies": {
+    "@types/node": "^20.4.7",
+    "prettier": "^2.8.4"
+  },
+  "dependencies": {
+    "autoprefixer": "^10.4.14",
+    "cssnano": "^6.0.1",
+    "flatpickr": "^4.6.13",
+    "rollup-plugin-commonjs": "^10.1.0",
+    "rollup-plugin-node-resolve": "^5.2.0",
+    "rollup-plugin-terser": "^7.0.2",
+    "rollup-plugin-typescript2": "^0.35.0",
+    "sass": "^1.64.2",
+    "typescript": "^5.0.2",
+    "vite": "^4.2.1",
+    "vite-plugin-dts": "^2.1.0"
+  }
+}
