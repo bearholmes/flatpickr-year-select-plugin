@@ -1,0 +1,335 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>flatpickr Year Select Plugin - Demo</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css" />
+    <link rel="stylesheet" href="./dist/yearSelectPlugin.min.css" />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family:
+          -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        min-height: 100vh;
+        padding: 20px;
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      header {
+        text-align: center;
+        color: white;
+        margin-bottom: 50px;
+        padding: 40px 20px;
+      }
+
+      h1 {
+        font-size: 3rem;
+        margin-bottom: 10px;
+        font-weight: 700;
+      }
+
+      .subtitle {
+        font-size: 1.2rem;
+        opacity: 0.9;
+      }
+
+      .demo-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+        gap: 30px;
+        margin-bottom: 40px;
+      }
+
+      .demo-card {
+        background: white;
+        border-radius: 12px;
+        padding: 30px;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+        transition:
+          transform 0.3s ease,
+          box-shadow 0.3s ease;
+      }
+
+      .demo-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 15px 50px rgba(0, 0, 0, 0.15);
+      }
+
+      .demo-card h2 {
+        font-size: 1.5rem;
+        margin-bottom: 10px;
+        color: #333;
+      }
+
+      .demo-card p {
+        color: #666;
+        margin-bottom: 20px;
+        line-height: 1.6;
+      }
+
+      .input-group {
+        margin-bottom: 15px;
+      }
+
+      .input-group label {
+        display: block;
+        margin-bottom: 8px;
+        color: #555;
+        font-weight: 500;
+      }
+
+      .input-group input {
+        width: 100%;
+        padding: 12px 15px;
+        border: 2px solid #e0e0e0;
+        border-radius: 8px;
+        font-size: 1rem;
+        transition: border-color 0.3s ease;
+      }
+
+      .input-group input:focus {
+        outline: none;
+        border-color: #667eea;
+      }
+
+      .code-block {
+        background: #f5f5f5;
+        border-radius: 8px;
+        padding: 15px;
+        margin-top: 20px;
+        overflow-x: auto;
+      }
+
+      .code-block pre {
+        margin: 0;
+        font-family: 'Courier New', monospace;
+        font-size: 0.9rem;
+        color: #333;
+      }
+
+      footer {
+        text-align: center;
+        color: white;
+        padding: 30px;
+        opacity: 0.9;
+      }
+
+      footer a {
+        color: white;
+        text-decoration: none;
+        font-weight: 600;
+      }
+
+      footer a:hover {
+        text-decoration: underline;
+      }
+
+      @media (max-width: 768px) {
+        h1 {
+          font-size: 2rem;
+        }
+
+        .demo-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <h1>📅 flatpickr Year Select Plugin</h1>
+        <p class="subtitle">A modern year dropdown plugin for flatpickr</p>
+      </header>
+
+      <div class="demo-grid">
+        <!-- Demo 1: Basic Usage -->
+        <div class="demo-card">
+          <h2>🎯 Basic Usage</h2>
+          <p>Default configuration with 3 years before and after the current year.</p>
+          <div class="input-group">
+            <label for="demo1">Select a date:</label>
+            <input type="text" id="demo1" placeholder="Click to open calendar" />
+          </div>
+          <div class="code-block">
+            <pre>
+flatpickr("#demo1", {
+  plugins: [yearSelectPlugin()]
+});</pre
+            >
+          </div>
+        </div>
+
+        <!-- Demo 2: Custom Range -->
+        <div class="demo-card">
+          <h2>🔧 Custom Range</h2>
+          <p>Extended year range: 10 years before and 10 years after.</p>
+          <div class="input-group">
+            <label for="demo2">Select a date:</label>
+            <input type="text" id="demo2" placeholder="Click to open calendar" />
+          </div>
+          <div class="code-block">
+            <pre>
+flatpickr("#demo2", {
+  plugins: [yearSelectPlugin({
+    start: 10,
+    end: 10
+  })]
+});</pre
+            >
+          </div>
+        </div>
+
+        <!-- Demo 3: With Date Constraints -->
+        <div class="demo-card">
+          <h2>📆 Date Constraints</h2>
+          <p>Respects minDate and maxDate automatically (2020-2030).</p>
+          <div class="input-group">
+            <label for="demo3">Select a date:</label>
+            <input type="text" id="demo3" placeholder="Click to open calendar" />
+          </div>
+          <div class="code-block">
+            <pre>
+flatpickr("#demo3", {
+  minDate: "2020-01-01",
+  maxDate: "2030-12-31",
+  plugins: [yearSelectPlugin()]
+});</pre
+            >
+          </div>
+        </div>
+
+        <!-- Demo 4: Future Dates Only -->
+        <div class="demo-card">
+          <h2>⏭️ Future Dates Only</h2>
+          <p>Only allow dates from today onwards.</p>
+          <div class="input-group">
+            <label for="demo4">Select a date:</label>
+            <input type="text" id="demo4" placeholder="Click to open calendar" />
+          </div>
+          <div class="code-block">
+            <pre>
+flatpickr("#demo4", {
+  minDate: "today",
+  plugins: [yearSelectPlugin({
+    end: 5
+  })]
+});</pre
+            >
+          </div>
+        </div>
+
+        <!-- Demo 5: Date Range -->
+        <div class="demo-card">
+          <h2>📅 Date Range</h2>
+          <p>Select start and end dates with year dropdown.</p>
+          <div class="input-group">
+            <label for="demo5">Select date range:</label>
+            <input type="text" id="demo5" placeholder="Click to open calendar" />
+          </div>
+          <div class="code-block">
+            <pre>
+flatpickr("#demo5", {
+  mode: "range",
+  plugins: [yearSelectPlugin()]
+});</pre
+            >
+          </div>
+        </div>
+
+        <!-- Demo 6: With Time -->
+        <div class="demo-card">
+          <h2>⏰ With Time Picker</h2>
+          <p>Combine year dropdown with time selection.</p>
+          <div class="input-group">
+            <label for="demo6">Select date and time:</label>
+            <input type="text" id="demo6" placeholder="Click to open calendar" />
+          </div>
+          <div class="code-block">
+            <pre>
+flatpickr("#demo6", {
+  enableTime: true,
+  dateFormat: "Y-m-d H:i",
+  plugins: [yearSelectPlugin()]
+});</pre
+            >
+          </div>
+        </div>
+      </div>
+
+      <footer>
+        <p>
+          Made with ❤️ by <a href="https://github.com/bearholmes" target="_blank">bearholmes</a>
+          •
+          <a href="https://github.com/bearholmes/flatpickr-year-select-plugin" target="_blank"
+            >View on GitHub</a
+          >
+          •
+          <a href="https://www.npmjs.com/package/flatpickr-year-select-plugin" target="_blank"
+            >npm Package</a
+          >
+        </p>
+      </footer>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script src="./dist/flatpickr-year-select-plugin.umd.js"></script>
+    <script>
+      // Demo 1: Basic Usage
+      flatpickr('#demo1', {
+        plugins: [yearSelectPlugin()],
+      });
+
+      // Demo 2: Custom Range
+      flatpickr('#demo2', {
+        plugins: [
+          yearSelectPlugin({
+            start: 10,
+            end: 10,
+          }),
+        ],
+      });
+
+      // Demo 3: With Date Constraints
+      flatpickr('#demo3', {
+        minDate: '2020-01-01',
+        maxDate: '2030-12-31',
+        plugins: [yearSelectPlugin()],
+      });
+
+      // Demo 4: Future Dates Only
+      flatpickr('#demo4', {
+        minDate: 'today',
+        plugins: [
+          yearSelectPlugin({
+            end: 5,
+          }),
+        ],
+      });
+
+      // Demo 5: Date Range
+      flatpickr('#demo5', {
+        mode: 'range',
+        plugins: [yearSelectPlugin()],
+      });
+
+      // Demo 6: With Time
+      flatpickr('#demo6', {
+        enableTime: true,
+        dateFormat: 'Y-m-d H:i',
+        plugins: [yearSelectPlugin()],
+      });
+    </script>
+  </body>
+</html>

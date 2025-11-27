@@ -1,11 +1,11 @@
-// vite.config.js
 import { defineConfig } from 'vite';
 import dts from 'vite-plugin-dts';
 
 export default defineConfig({
   plugins: [
     dts({
-      outputDir: 'dist/types', // 원하는 폴더로 변경하세요
+      outDir: 'dist/types',
+      include: ['src/**/*.ts'],
     }),
   ],
   resolve: {
@@ -13,15 +13,24 @@ export default defineConfig({
   },
   build: {
     target: 'esnext',
+    sourcemap: true,
     lib: {
-      entry: 'src/plugin.ts', // TypeScript 파일의 경로를 지정해주어야 합니다.
-      name: 'plugin',
+      entry: 'src/plugin.ts',
+      name: 'yearSelectPlugin',
+      formats: ['es', 'umd', 'cjs'],
+      fileName: (format) => {
+        if (format === 'es') return 'flatpickr-year-select-plugin.mjs';
+        if (format === 'umd') return 'flatpickr-year-select-plugin.umd.js';
+        return 'flatpickr-year-select-plugin.js';
+      },
     },
     rollupOptions: {
+      external: ['flatpickr'],
       output: {
-        exports: 'named',
-        format: 'es',
-        sourcemap: true,
+        exports: 'default',
+        globals: {
+          flatpickr: 'flatpickr',
+        },
       },
     },
     outDir: 'dist',
