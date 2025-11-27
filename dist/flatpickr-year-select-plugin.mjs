@@ -1,58 +1,90 @@
-const D = function(i) {
-  const a = {
+const w = function(i) {
+  const v = {
     start: i && i.start !== void 0 ? i.start : 3,
     end: i && i.end !== void 0 ? i.end : 3
-  }, r = (/* @__PURE__ */ new Date()).getFullYear(), d = document.createElement("div");
-  d.classList.add("flatpickr-current-year");
-  const s = document.createElement("select");
-  s.classList.add("flatpickr-monthDropdown-years");
-  const l = function(e) {
-    const t = a.start !== void 0 ? e - a.start : e, o = a.end !== void 0 ? e + a.end : e;
-    for (let c = t; c <= o; c++) {
-      const n = document.createElement("option");
-      n.value = String(c), n.text = String(c), s.appendChild(n);
-    }
-    s.value = String(e);
   };
-  return function(e) {
-    if (e) {
-      if (e.config.minDate) {
-        const t = new Date(e.config.minDate);
-        r >= t.getFullYear() && (a.start = r - t.getFullYear());
-      }
-      if (e.config.maxDate) {
-        const t = new Date(e.config.maxDate);
-        r <= t.getFullYear() && (a.end = t.getFullYear() - r);
-      }
-      return e.yearSelectContainer = e._createElement("div", "flatpickr-years", ""), l(r), s.addEventListener("change", function(t) {
-        const o = t.target;
-        if (!o)
-          return;
-        const c = o.options[o.selectedIndex].value;
-        e.changeYear(Number(c)), e.redraw();
-      }), d.append(s), e.yearSelectContainer.append(d), {
-        onReady: function() {
-          const o = e.monthNav.className, n = e.calendarContainer.getElementsByClassName(o)[0];
-          if (!n)
-            return;
-          n.parentNode.insertBefore(
-            e.yearSelectContainer,
-            n.parentNode.firstChild
-          );
-          const u = a.start !== void 0 ? r - a.start : r, m = a.end !== void 0 ? r + a.end : r;
-          e.config.minDate || e.set("minDate", `${u}-01-01`), e.config.maxDate || e.set("maxDate", `${m}-12-31`);
-        },
-        onOpen: function(o, c, n) {
-          s.value = String(n.currentYear);
-        },
-        onYearChange: function(o, c, n) {
-          s.value = String(n.currentYear);
+  return function(l) {
+    if (!l) return {};
+    const n = l, u = { ...v }, f = (a) => {
+      if (!a) return;
+      const r = (e) => {
+        if (e) {
+          if (e instanceof Date) return isNaN(e.getTime()) ? void 0 : e;
+          if (typeof e == "string" || typeof e == "number") {
+            const t = n.parseDate ? n.parseDate(e) : new Date(e);
+            return t && !isNaN(t.getTime()) ? t : void 0;
+          }
         }
       };
-    }
+      if (Array.isArray(a)) {
+        for (const e of a) {
+          const t = r(e);
+          if (t) return t;
+        }
+        return;
+      }
+      return r(a);
+    }, p = () => {
+      const a = f(n.config.minDate), r = f(n.config.maxDate), e = a?.getFullYear(), t = r?.getFullYear(), o = e !== void 0 && t !== void 0 ? Math.min(e, t) : e, s = e !== void 0 && t !== void 0 ? Math.max(e, t) : t;
+      return { minYear: o, maxYear: s };
+    }, g = (a) => {
+      const { minYear: r, maxYear: e } = p();
+      return r !== void 0 && a < r ? r : e !== void 0 && a > e ? e : a;
+    }, y = (a) => {
+      const { minYear: r, maxYear: e } = p(), t = g(a), o = u.start !== void 0 ? t - u.start : t, s = u.end !== void 0 ? t + u.end : t, h = r !== void 0 ? Math.max(o, r) : o, x = e !== void 0 ? Math.min(s, e) : s;
+      return { clampedYear: t, start: h, end: x };
+    }, D = (() => {
+      const a = l.selectedDates?.[0]?.getFullYear(), r = f(l.config.defaultDate), e = r && !isNaN(r.getTime()) ? r.getFullYear() : void 0;
+      return g(
+        n.currentYear ?? a ?? e ?? (/* @__PURE__ */ new Date()).getFullYear()
+      );
+    })(), Y = document.createElement("div");
+    Y.classList.add("flatpickr-current-year");
+    const c = document.createElement("select");
+    c.classList.add("flatpickr-monthDropdown-years"), c.setAttribute("aria-label", "Year"), c.setAttribute("name", "year");
+    let d = !1;
+    const m = function(a) {
+      c.innerHTML = "";
+      const { clampedYear: r, start: e, end: t } = y(a);
+      for (let o = e; o <= t; o++) {
+        const s = document.createElement("option");
+        s.value = String(o), s.text = String(o), c.appendChild(s);
+      }
+      return c.value = String(r), r;
+    };
+    return n.yearSelectContainer = n._createElement("div", "flatpickr-years", ""), m(D), c.addEventListener("change", function(a) {
+      const r = a.target;
+      if (!r) return;
+      const e = r.options[r.selectedIndex].value;
+      n.changeYear(Number(e)), n.redraw();
+    }), Y.append(c), n.yearSelectContainer && n.yearSelectContainer.append(Y), {
+      onReady: function() {
+        if (!n.monthNav || !n.calendarContainer) {
+          console.warn("flatpickr-year-select-plugin: Required elements not found");
+          return;
+        }
+        const r = n.monthNav.className, t = n.calendarContainer.getElementsByClassName(r)[0];
+        if (!t || !t.parentNode || !n.yearSelectContainer) return;
+        t.parentNode.insertBefore(n.yearSelectContainer, t.parentNode.firstChild);
+        const { start: o, end: s } = y(D);
+        n.config.minDate || n.set("minDate", `${o}-01-01`), n.config.maxDate || n.set("maxDate", `${s}-12-31`);
+      },
+      onOpen: function(r, e, t) {
+        const o = m(t.currentYear);
+        o !== t.currentYear && (d = !0, n.changeYear(o), n.redraw(), d = !1);
+      },
+      onYearChange: function(r, e, t) {
+        if (d) {
+          d = !1, m(t.currentYear);
+          return;
+        }
+        const o = m(t.currentYear);
+        o !== t.currentYear && (d = !0, n.changeYear(o), n.redraw(), d = !1);
+      }
+    };
   };
 };
 export {
-  D as default
+  w as default
 };
 //# sourceMappingURL=flatpickr-year-select-plugin.mjs.map
