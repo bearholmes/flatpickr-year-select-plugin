@@ -21,3 +21,6 @@ src/
 yarn-error.log
 build-css.cjs
 .eslintrc
+.editorconfig
+AGENTS.md
+.github
