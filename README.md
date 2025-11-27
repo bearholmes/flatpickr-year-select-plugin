@@ -158,10 +158,6 @@ flatpickr('#myInput', {
 - **Browsers**: All modern browsers (Chrome, Firefox, Safari, Edge)
 - **Frameworks**: Works with React, Vue, Angular, Svelte, and vanilla JS
 
-## 📝 Changelog
-
-See [CHANGELOG.md](./CHANGELOG.md) for a list of changes.
-
 ## 🛠️ Development
 
 ```bash
@@ -196,43 +192,6 @@ npm run format
 npm run type-check
 ```
 
-### Testing
-
-This plugin includes comprehensive unit tests using Jest. The test suite covers:
-
-- ✅ Plugin configuration and initialization
-- ✅ DOM element creation and attributes
-- ✅ Multiple instance support
-- ✅ Date constraint handling (minDate/maxDate)
-- ✅ Event handlers (onChange, onOpen, onYearChange)
-- ✅ Error handling and edge cases
-- ✅ Year option management
-
-Current test coverage:
-
-- **Statements**: 98.38%
-- **Branches**: 86.11%
-- **Functions**: 100%
-- **Lines**: 100%
-
-### Project Structure
-
-```
-flatpickr-year-select-plugin/
-├── src/
-│   ├── plugin.ts       # Main plugin source
-│   └── plugin.scss     # Plugin styles
-├── tests/
-│   ├── plugin.test.cjs # Unit tests (Jest + jsdom)
-│   └── setup.cjs       # Test configuration
-├── dist/               # Built files
-├── build-css.cjs       # CSS build script
-├── vite.config.ts      # Vite configuration
-├── jest.config.js      # Jest configuration
-├── eslint.config.js    # ESLint configuration
-└── package.json
-```
-
 ## 🤝 Contributing
 
 Contributions are welcome! Please feel free to submit a Pull Request.
@@ -259,10 +218,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 👤 Author
 
-**bearholmes**
-
-- Email: bearholmes@gmail.com
-- GitHub: [@bearholmes](https://github.com/bearholmes)
+[@bearholmes](https://github.com/bearholmes)
 
 ## 🙏 Acknowledgments
 
