@@ -8,14 +8,16 @@
 #ignore gitignore
 .gitignore
 
-#ignore build files
-build-css.cjs
-.eslintrc
-
-#ignore development files
+# ignore development and local artifacts
 node_modules/
 temp/
-/assets/
-/example/
+coverage/
+tests/
+demo/
+src/
+.claude/
+.npm-cache/
 .idea
 yarn-error.log
+build-css.cjs
+.eslintrc
