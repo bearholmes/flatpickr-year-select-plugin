@@ -132,6 +132,8 @@ flatpickr('#myInput', {
 </html>
 ```
 
+- GitHub Pages demo: this repository ships a Pages workflow (`.github/workflows/pages.yml`) that builds the package and publishes `demo/index.html` with the built assets from `dist/`. Once Pages is enabled in repository settings, the workflow will deploy on pushes to `main`.
+
 ## 📖 API
 
 ### Plugin Configuration
